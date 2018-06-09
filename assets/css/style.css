@@ -39,7 +39,10 @@ body {
   padding: 10px;
   margin: 10px;
   box-shadow: 2px 2px 2px 2px #ccc;
-  border: 7px solid #e1e1e1;
+  border: 7px solid #cccccc;
+}
+#search-box:focus {
+  border: 7px solid #5e5e5e;
 }
 
 /* Category filters */
@@ -49,15 +52,16 @@ body {
 .filters a {
   padding: 10px;
   margin: 5px;
+  display: inline;
   box-shadow: 2px 2px 2px 2px #ccc;
 }
-.filters .clear {
+.filters .clearfilters {
   color: white;
   display: none;
 }
 .filters .filter {
-  background: #9e9e9e;
-  color: white;
+  background: #999999;
+  color: #ffffff;
 }
 
 /* Codesmell */

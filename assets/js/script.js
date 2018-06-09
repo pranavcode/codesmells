@@ -23,7 +23,7 @@ function categorize(category) {
       $(this).parent().show();
     });
     resetFilterButtons();
-    $('.clear').hide();
+    $('.clearfilters').hide();
   } else {
     $('.card-header').each(function(index){
       if(this.innerHTML.indexOf(category) > -1) {
@@ -41,6 +41,6 @@ function categorize(category) {
       }
     });
 
-    $('.clear').show();
+    $('.clearfilters').show();
   }
 }
