@@ -61,7 +61,6 @@ body {
 /* Codesmell */
 .codesmell {
   min-height: 270px;
-  min-width: 300px;
   max-height: 270px;
   background: linear-gradient(to bottom right, orange, #ff0000);
   color: #ffffff;
