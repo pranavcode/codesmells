@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="assets/js/script.js"></script>
+
+    <title>Code Smells</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>Code Smells</h1>
+        <h4>and perfumes</h4>
+      </header>
+
+      <div class="search">
+        <input type="text" onkeyup="search()" id="search-box" placeholder="search your favorite smell here..." autofocus />
+      </div>
+
+      <div class="filters">
+        <a class="btn filter" href="#" onclick="categorize('Bloaters')">Bloaters</a>
+        <a class="btn filter" href="#" onclick="categorize('Abusers')">Tool Abusers</a>
+        <a class="btn filter" href="#" onclick="categorize('Preventers')">Change Preventers</a>
+        <a class="btn filter" href="#" onclick="categorize('Dispensables')">Dispensables</a>
+        <a class="btn filter" href="#" onclick="categorize('Couplers')">Couplers</a>
+        <a class="btn clear" href="#" onclick="categorize('Clear')"><i class="fas fa-times"></i> Clear</a>
+      </div>
+
+      <div class="codesmells">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Tool Abusers</div>
+              <div class="card-body">
+                <h4 class="card-title">Alternative Classes with Different Interfaces</h4>
+                <p class="card-text">
+                  Classes performing same functions but have different method names.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Dispensables</div>
+              <div class="card-body">
+                <h4 class="card-title">Comments</h4>
+                <p class="card-text">
+                  Methods or classes filled with explanatory comments.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Dispensables</div>
+              <div class="card-body">
+                <h4 class="card-title">Data Class</h4>
+                <p class="card-text">
+                  Class responsible only for holding fields and accessor methods without haveing additional functionality to operate on the data they own.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Bloaters</div>
+              <div class="card-body">
+                <h4 class="card-title">Data Clumps</h4>
+                <p class="card-text">
+                  Pieces of information that flows together across methods or classes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Change Preventers</div>
+              <div class="card-body">
+                <h4 class="card-title">Divergent Change</h4>
+                <p class="card-text">
+                  Situation that forces change in many unrelated class methods when changes are made to a class.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Dispensables</div>
+              <div class="card-body">
+                <h4 class="card-title">Duplicate Code</h4>
+                <p class="card-text">
+                  Almost identical pieces of code repeated in two or more places.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Couplers</div>
+              <div class="card-body">
+                <h4 class="card-title">Feature Envy</h4>
+                <p class="card-text">
+                  Classes that tends to work on data from other classes than their own.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Couplers</div>
+              <div class="card-body">
+                <h4 class="card-title">Inappropriate Intimacy</h4>
+                <p class="card-text">
+                  Class uses private methods or data of another class.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Couplers</div>
+              <div class="card-body">
+                <h4 class="card-title">Incomplete Library Client</h4>
+                <p class="card-text">
+                  Third-party library stops meeting project's upcoming needs.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Bloaters</div>
+              <div class="card-body">
+                <h4 class="card-title">Large Class</h4>
+                <p class="card-text">
+                  Class have "too" many fields/methods/lines of code.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Dispensables</div>
+              <div class="card-body">
+                <h4 class="card-title">Lazy Class</h4>
+                <p class="card-text">
+                  Class that is maintained but does nothing.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Bloaters</div>
+              <div class="card-body">
+                <h4 class="card-title">Long Method</h4>
+                <p class="card-text">
+                  Method containing too many lines of code.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Bloaters</div>
+              <div class="card-body">
+                <h4 class="card-title">Long Parameter List</h4>
+                <p class="card-text">
+                  Methods that take too many parameters as their arguments.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Couplers</div>
+              <div class="card-body">
+                <h4 class="card-title">Message Chains</h4>
+                <p class="card-text">
+                  Successive calls made from one method to another with multiple hops in between to accomplish specific thing.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Couplers</div>
+              <div class="card-body">
+                <h4 class="card-title">Middle Man</h4>
+                <p class="card-text">
+                  Class that exits for a sole purpose of delegating work to other class.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Change Preventers</div>
+              <div class="card-body">
+                <h4 class="card-title">Parallel Inheritance Hierarchies</h4>
+                <p class="card-text">
+                  Changes made to one set of hierarchical classes needs its replication into parallel classes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Bloaters</div>
+              <div class="card-body">
+                <h4 class="card-title">Primitive Obsession</h4>
+                <p class="card-text">
+                  Obsessive use of primitive types instead of small classes for simple tasks.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Tool Abusers</div>
+              <div class="card-body">
+                <h4 class="card-title">Refused Bequest</h4>
+                <p class="card-text">
+                  Sub-classes use only some of the methods and data inheirted from parent classes, keeping unneeded methods unused or redefined to throw undefined exceptions.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Change Preventers</div>
+              <div class="card-body">
+                <h4 class="card-title">Shotgun Surgery</h4>
+                <p class="card-text">
+                  Adding a change in specific part of the code requires many small changes in many different classes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Dispensables</div>
+              <div class="card-body">
+                <h4 class="card-title">Speculative Generality</h4>
+                <p class="card-text">
+                  Code that is written in anticipation of future requirements and stays unused forever.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Tool Abusers</div>
+              <div class="card-body">
+                <h4 class="card-title">Switch Statements</h4>
+                <p class="card-text">
+                  Complex set of conditionals to perform next step.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card codesmell">
+              <div class="card-header">Tool Abusers</div>
+              <div class="card-body">
+                <h4 class="card-title">Temporary Field</h4>
+                <p class="card-text">
+                  Temporary properties that get their values under very specific circumstances, otherwise remains empty.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="codesmell-modal">
+
+      </div>
+
+      <hr>
+      <div class="footer">
+        Inspired from <a href="https://twitter.com/sandimetz">Sandi Metz</a>'s
+        talk <a href="https://www.youtube.com/watch?v=PJjHfa5yxlU">"Get a Whiff of This"</a>
+        at <a href="https://railsconf.com/">RailsConf 2016</a>
+        held at Kansas City (USA)<br/>
+
+        Developed by Pranav Kulkarni
+      </div>
+    </div>
+  </body>
+</html>
