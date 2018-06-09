@@ -3,7 +3,7 @@
   src: url('../fonts/OpenSans-Regular.ttf') format('truetype');
 }
 body {
-  font-family: 'OpenSans Regular', verdana, arial, sans-serif;
+  font-family: 'Montserrat', 'OpenSans Regular', verdana, arial, sans-serif;
   font-size: 18px;
   background: #efefef;
 }
