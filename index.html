@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -19,7 +19,7 @@
   <body>
     <div class="container">
       <header class="header">
-        <h1>Code Smells</h1>
+        <h1>Code Smells <i class="fas fa-nose"></i></h1>
         <h4>and perfumes</h4>
       </header>
 
@@ -29,9 +29,8 @@
         <a class="btn filter" href="#" onclick="categorize('Preventers')">Change Preventers</a>
         <a class="btn filter" href="#" onclick="categorize('Dispensables')">Dispensables</a>
         <a class="btn filter" href="#" onclick="categorize('Couplers')">Couplers</a>
-        <a class="btn clearfilters" href="#" onclick="categorize('Clear')"><i class="fas fa-times"></i> Clear</a>
+        <a class="btn clearfilters btn-danger" href="#" onclick="categorize('Clear')">Clear</a>
       </div>
-
       <div class="search">
         <input type="text" onkeyup="search()" id="search-box" placeholder="search your favorite smell here..." autofocus />
       </div>
@@ -41,21 +40,30 @@
           <div class="col-lg-4 col-md-6 col-sm-12 expansion-section codesmell-section">
             <div class="card codesmell">
               <div class="card-header">
-                <a href="#" class="btn close-expansion float-right">close</a>
-                <span class="details">Category: </span>
-                Test Header
+                <a href="#" class="btn btn-light close-expansion float-right"><i class="fas fa-times"></i> Close</a>
+                <span class="details heading-text">CATEGORY <br/></span>
               </div>
               <div class="card-body">
-                <h4 class="card-title">Test Title</h4>
-                <span class="details">Excerpt:</span>
-                <p class="card-text">Test Text</p>
+                <span class="details heading-text">NAME</span>
+                <h4 class="card-title"></h4>
+                <span class="details heading-text">EXCERPT</span>
+                <p class="card-text excerpt-text"></p>
+                <span class="details heading-text">DESCRIPTION</span>
+                <p class="card-text details description-text"></p>
+                <span class="details heading-text">REASON(S)</span>
+                <p class="card-text details reasons-text"></p>
+                <span class="details heading-text">SOLUTION(S)</span>
+                <p class="card-text details solutions-text"></p>
+                <span class="details heading-text">REFACTORING(S)</span>
+                <p class="card-text details refactorings-text"></p>
+
+                <a href="#" class="btn btn-light expansion-button">Learn More</i></a>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <hr>
+      <hr/>
       <div class="footer">
         Inspired from <a href="https://twitter.com/sandimetz">Sandi Metz</a>'s
         talk <a href="https://www.youtube.com/watch?v=PJjHfa5yxlU">"Get a Whiff of This"</a>

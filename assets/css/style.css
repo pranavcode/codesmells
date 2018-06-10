@@ -3,9 +3,12 @@
   src: url('../fonts/OpenSans-Regular.ttf') format('truetype');
 }
 body {
-  font-family: 'Montserrat', 'OpenSans Regular', verdana, arial, sans-serif;
+  font-family: 'Lato', 'OpenSans Regular', verdana, arial, sans-serif;
   font-size: 18px;
   background: #efefef;
+}
+h4, h6 {
+  font-weight: 700;
 }
 
 /* Common styles */
@@ -19,7 +22,7 @@ body {
 
 /* Header section */
 .header {
-  color: #5e5e5e;
+  color: #3b5998;
   text-align: center;
   padding: 20px;
 }
@@ -38,21 +41,20 @@ body {
   width: inherit;
   padding: 10px;
   margin: 10px;
-  box-shadow: 2px 2px 2px 2px #ccc;
+  box-shadow: 2px 2px 2px 2px #cccccc;
   border: 7px solid #cccccc;
 }
 #search-box:focus {
-  border: 7px solid #5e5e5e;
+  border: 7px solid #3b5998;
 }
 
 /* Category filters */
 .filters {
-  padding: 20px;
+  padding: 10px;
 }
 .filters a {
-  padding: 10px;
+  padding: 5px;
   margin: 5px;
-  display: inline;
   box-shadow: 2px 2px 2px 2px #ccc;
 }
 .filters .clearfilters {
@@ -66,9 +68,8 @@ body {
 
 /* Codesmell */
 .codesmell {
-  min-height: 270px;
-  max-height: 270px;
-  background: linear-gradient(to bottom right, orange, #ff0000);
+  min-height: 350px;
+  background: #3b5998;
   color: #ffffff;
   margin: 10px;
   overflow: hidden;
@@ -76,6 +77,11 @@ body {
 }
 .codesmell h4 {
   font-weight: 700;
+}
+.expansion-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 
 /* Footer */
@@ -85,11 +91,17 @@ body {
 }
 
 .details {
-  font-weight: bold;
   display: none;
+  letter-spacing: normal;
 }
-.close-expansion {
+
+.details.heading-text {
+  font-weight: bold;
   color: #ffffff;
-  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 1.4px;
+}
+
+.close-expansion {
   display: none;
 }

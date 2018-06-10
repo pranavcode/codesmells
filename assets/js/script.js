@@ -190,7 +190,7 @@ var codesmells = [{
 }]
 
 function resetFilterButtons() {
-  $('.filters .btn').each(function(index){
+  $('.filters .btn.filter').each(function(index){
     var GREY_COLOR = "#9e9e9e";
     $(this).css("background", GREY_COLOR);
   });
@@ -224,9 +224,9 @@ function categorize(category) {
       }
     });
 
-    $('.filters .btn').each(function(index){
+    $('.filters .btn.filter').each(function(index){
       if(this.innerHTML.indexOf(category) > -1) {
-        $(this).css("background", "#1e1e1e");
+        $(this).css("background", "#3b5998");
       } else {
         $(this).css("background", "#9e9e9e");
       }
@@ -237,36 +237,55 @@ function categorize(category) {
 }
 
 function generateCodeSmells() {
-  var node = $(".codesmell-section").clone();
+  node = window.nodeTemplate.clone();
   node.removeClass("codesmell-section");
   var nodeBackup = node;
   codesmells.forEach(function(codesmell) {
     node = nodeBackup.clone();
-    node.find('.card-header').text(codesmell['category']);
+    node.find('.card-header').append(codesmell['category']);
     node.find('.card-title').text(codesmell['name']);
-    node.find('.card-text').text(codesmell['excerpt']);
-
+    node.find('.excerpt-text').text(codesmell['excerpt']);
+    node.find('.description-text').text(codesmell['description'] ? 'Coming soon.': codesmell['description']);
+    node.find('.reasons-text').text(codesmell['reasons']);
+    node.find('.solutions-text').text(codesmell['solutions']);
+    node.find('.refactorings-text').text(codesmell['refactorings']);
     $('.codesmells > .row').append(node);
   });
-  $('.codesmell-section').remove();
-}
 
-$(function() {
-  generateCodeSmells();
-
-  $('.expansion-section').click(function() {
-    currentCardTitle = $(this).find('.card-title').text();
-    $('.expansion-section').each(function(index) {
-      if($(this).find('.card-title').text() !== currentCardTitle) {
+  $(".expansion-section").on("click", ".expansion-button", function() {
+    currentCardTitle = $(this).siblings(".card-title").text();
+    $(".expansion-section").each(function(index) {
+      if($(this).find(".card-title").text() !== currentCardTitle) {
         $(this).hide();
       }
     });
-    $(this).removeClass("col-lg-4 col-md-6");
-    $(this).find(".details").show();
-    $(this).find(".close-expansion").show();
+    hideOtherSections();
+    expansionSection = $(this).closest(".expansion-section");
+    $(expansionSection).removeClass("col-lg-4 col-md-6");
+    $(expansionSection).find(".details").show();
+    $(expansionSection).find(".close-expansion").show();
+    $(this).remove();
   });
 
-  $('.close-expansion').click(function() {
-    location.reload();
+  $(".expansion-section").on("click", ".close-expansion", function() {
+    showOtherSections();
+    $(this).closest(".expansion-section").remove();
   });
+}
+
+function hideOtherSections() {
+  $(".filters").hide();
+  $(".search").hide();
+}
+
+function showOtherSections() {
+  generateCodeSmells();
+  $(".filters").show();
+  $(".search").show();
+}
+
+$(function() {
+  window.nodeTemplate = $(".codesmell-section").clone();
+  $(".codesmell-section").remove();
+  generateCodeSmells();
 });
