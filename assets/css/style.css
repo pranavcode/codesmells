@@ -83,3 +83,13 @@ body {
   padding-bottom: 20px;
   text-align: center;
 }
+
+.details {
+  font-weight: bold;
+  display: none;
+}
+.close-expansion {
+  color: #ffffff;
+  text-decoration: none;
+  display: none;
+}
