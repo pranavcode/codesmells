@@ -190,14 +190,16 @@ var codesmells = [{
 }]
 
 function resetFilterButtons() {
-  $('.filters .btn.filter').each(function(index){
-    var GREY_COLOR = "#9e9e9e";
-    $(this).css("background", GREY_COLOR);
+  $('.filters .btn.filter').each(function(index) {
+    $(this).css("background", "#9e9e9e");
   });
 }
 
 function search() {
   resetFilterButtons();
+  $('.card').each(function() {
+    $(this).parent().show();
+  })
   var searchTerm = $('#search-box').val().toLowerCase()
   $('.card').each(function(index){
     if(this.innerHTML.toLowerCase().indexOf(searchTerm) > -1) {
@@ -206,17 +208,18 @@ function search() {
       $(this).parent().hide();
     }
   });
+  $(".count-smells").text("Showing " + $(".card:visible").length + " of 22 code smells");
 }
 
 function categorize(category) {
   if(category === 'Clear') {
-    $('.card').each(function(index){
-      $(this).parent().show();
-    });
+    $(".expansion-section").show();
     resetFilterButtons();
     $('.clearfilters').hide();
+    window.filter = '';
   } else {
-    $('.card-header').each(function(index){
+    window.filter = category;
+    $('.card-header').each(function(index) {
       if(this.innerHTML.indexOf(category) > -1) {
         $(this).parent().parent().show();
       } else {
@@ -232,8 +235,57 @@ function categorize(category) {
       }
     });
 
-    $('.clearfilters').show();
+    $('.clearfilters').css("display", "inline-block");
   }
+  $(".count-smells").text("Showing " + $('.card:visible').length + " of 22 code smells");
+}
+
+function expandDetailsSection(expansionSection) {
+  $(expansionSection).removeClass("col-lg-4 col-md-6");
+  $(expansionSection).find(".details").show();
+  $(expansionSection).find(".close-expansion").show();
+}
+
+function compressDetailsSection(expansionSection) {
+  $(expansionSection).addClass("col-lg-4 col-md-6");
+  $(expansionSection).find(".details").hide();
+  $(expansionSection).find(".expansion-button").show();
+}
+
+function reinstateBindings() {
+  $(".expansion-section").on("click", ".expansion-button", function() {
+    currentCardTitle = $(this).siblings(".card-title").text();
+    $(".expansion-section").each(function(index) {
+      if($(this).find(".card-title").text() !== currentCardTitle) {
+        $(this).hide();
+      }
+    });
+    hideOtherSections();
+    expandDetailsSection($(this).closest(".expansion-section"));
+    $(this).hide();
+  });
+
+  $(".expansion-section").on("click", ".close-expansion", function() {
+    showOtherSections();
+    compressDetailsSection($(this).closest(".expansion-section"));
+    $(this).hide();
+    if(window.filter !== undefined && window.filter !== "") {
+      categorize(window.filter);
+    }
+  });
+}
+
+function hideOtherSections() {
+  $(".filters").hide();
+  $(".search").hide();
+  $(".count-smells").hide();
+}
+
+function showOtherSections() {
+  $(".expansion-section").show();
+  $(".filters").show();
+  $(".search").show();
+  $(".count-smells").show();
 }
 
 function generateCodeSmells() {
@@ -245,43 +297,13 @@ function generateCodeSmells() {
     node.find('.card-header').append(codesmell['category']);
     node.find('.card-title').text(codesmell['name']);
     node.find('.excerpt-text').text(codesmell['excerpt']);
-    node.find('.description-text').text(codesmell['description'] ? 'Coming soon.': codesmell['description']);
+    node.find('.description-text').text(codesmell['description']);
     node.find('.reasons-text').text(codesmell['reasons']);
     node.find('.solutions-text').text(codesmell['solutions']);
     node.find('.refactorings-text').text(codesmell['refactorings']);
     $('.codesmells > .row').append(node);
   });
-
-  $(".expansion-section").on("click", ".expansion-button", function() {
-    currentCardTitle = $(this).siblings(".card-title").text();
-    $(".expansion-section").each(function(index) {
-      if($(this).find(".card-title").text() !== currentCardTitle) {
-        $(this).hide();
-      }
-    });
-    hideOtherSections();
-    expansionSection = $(this).closest(".expansion-section");
-    $(expansionSection).removeClass("col-lg-4 col-md-6");
-    $(expansionSection).find(".details").show();
-    $(expansionSection).find(".close-expansion").show();
-    $(this).remove();
-  });
-
-  $(".expansion-section").on("click", ".close-expansion", function() {
-    showOtherSections();
-    $(this).closest(".expansion-section").remove();
-  });
-}
-
-function hideOtherSections() {
-  $(".filters").hide();
-  $(".search").hide();
-}
-
-function showOtherSections() {
-  generateCodeSmells();
-  $(".filters").show();
-  $(".search").show();
+  reinstateBindings();
 }
 
 $(function() {
