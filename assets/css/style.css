@@ -7,9 +7,6 @@ body {
   font-size: 18px;
   background: #efefef;
 }
-h4, h6 {
-  font-weight: 700;
-}
 
 /* Common styles */
 .header, .search, .filters, .codesmells, .footer {
@@ -75,9 +72,6 @@ h4, h6 {
   overflow: hidden;
   box-shadow: 2px 2px 2px 2px #ccc;
 }
-.codesmell h4 {
-  font-weight: 700;
-}
 .expansion-button {
   position: absolute;
   bottom: 20px;
@@ -98,7 +92,7 @@ h4, h6 {
 .details.heading-text {
   font-weight: bold;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 1.4px;
 }
 
