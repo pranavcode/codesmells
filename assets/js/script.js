@@ -206,6 +206,10 @@ var codesmells = [{
   "refactorings": "",
 }]
 
+function countSmells() {
+  $(".count-smells").text("Showing " + $(".card:visible").length + " of 22 code smells");
+}
+
 function resetFilterButtons() {
   $('.filters .btn.filter').each(function(index) {
     $(this).css("background", "#9e9e9e");
@@ -225,7 +229,6 @@ function search() {
       $(this).parent().hide();
     }
   });
-  $(".count-smells").text("Showing " + $(".card:visible").length + " of 22 code smells");
 }
 
 function categorize(category) {
@@ -254,7 +257,7 @@ function categorize(category) {
 
     $('.clearfilters').css("display", "inline-block");
   }
-  $(".count-smells").text("Showing " + $('.card:visible').length + " of 22 code smells");
+  countSmells();
 }
 
 function expandDetailsSection(expansionSection) {
