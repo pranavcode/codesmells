@@ -1,3 +1,20 @@
+var filters = [{
+  "name": "Bloaters",
+  "description": "To be added."
+}, {
+  "name": "Tool Abusers",
+  "description": "To be added."
+}, {
+  "name": "Change Preventers",
+  "description": "To be added."
+}, {
+  "name": "Dispensables",
+  "description": "To be added."
+}, {
+  "name": "Couplers",
+  "description": "To be added"
+}];
+
 var codesmells = [{
   "name": "Alternative Classes with Different Interfaces",
 	"category": "Tool Abusers",
