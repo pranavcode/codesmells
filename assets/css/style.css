@@ -66,6 +66,9 @@ body {
   background: #999999;
   color: #ffffff;
 }
+.filter-section {
+  padding: 12px;
+}
 
 /* Codesmell */
 .codesmell {
