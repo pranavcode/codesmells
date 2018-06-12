@@ -214,6 +214,8 @@ function resetFilterButtons() {
   $('.filters .btn.filter').each(function(index) {
     $(this).css("background", "#9e9e9e");
   });
+  $(".clearfilters").hide();
+  $(".filter-section").hide();
 }
 
 function search() {
@@ -233,13 +235,15 @@ function search() {
 
 function categorize(category) {
   if(category === 'Clear') {
-    $(".expansion-section").show();
-    resetFilterButtons();
-    $('.clearfilters').hide();
     window.filter = '';
+    $(".expansion-section").show();
+    $(".filters-section").hide();
+    resetFilterButtons();
   } else {
     window.filter = category;
-    $('.card-header').each(function(index) {
+    $(".filter-section").hide();
+    $(".filter-section." + category.replace(/\s/g,'')).show();
+    $(".card-header").each(function(index) {
       if(this.innerHTML.indexOf(category) > -1) {
         $(this).parent().parent().show();
       } else {
@@ -247,7 +251,7 @@ function categorize(category) {
       }
     });
 
-    $('.filters .btn.filter').each(function(index){
+    $(".filters .btn.filter").each(function(index){
       if(this.innerHTML.indexOf(category) > -1) {
         $(this).css("background", "#3b5998");
       } else {
@@ -255,7 +259,7 @@ function categorize(category) {
       }
     });
 
-    $('.clearfilters').css("display", "inline-block");
+    $(".clearfilters").css("display", "inline-block");
   }
   countSmells();
 }
@@ -326,8 +330,38 @@ function generateCodeSmells() {
   reinstateBindings();
 }
 
+function generateFilters() {
+  node = $(".filter-template").clone();
+  node.removeClass("filter-template");
+  var nodeBackup = node;
+  filters.reverse().forEach(function(filter) {
+    node = nodeBackup.clone();
+    node.text(filter["name"]);
+    node.attr("onclick", "categorize('"+ filter["name"] +"')");
+    $(".filters").prepend(node);
+  });
+  $(".filter-template").hide();
+}
+
+function generateFilterInfo() {
+  node = $(".filter-info").clone();
+  node.removeClass("filter-info").addClass("filter-section").hide();
+  var nodeBackup = node;
+  filters.forEach(function(filter) {
+    node = nodeBackup.clone();
+    node.addClass(filter["name"].replace(/\s/g,''));
+    node.find(".filter-header").text(filter["name"]);
+    node.find(".filter-text").text(filter["description"]);
+    $(".filters-description").append(node);
+  });
+  $(".filter-info").remove();
+}
+
 $(function() {
   window.nodeTemplate = $(".codesmell-section").clone();
   $(".codesmell-section").remove();
   generateCodeSmells();
+  generateFilters();
+  generateFilterInfo();
+  countSmells();
 });

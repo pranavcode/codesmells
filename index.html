@@ -23,17 +23,22 @@
       </header>
 
       <div class="filters">
-        <a class="btn filter" href="#" onclick="categorize('Bloaters')">Bloaters</a>
-        <a class="btn filter" href="#" onclick="categorize('Abusers')">Tool Abusers</a>
-        <a class="btn filter" href="#" onclick="categorize('Preventers')">Change Preventers</a>
-        <a class="btn filter" href="#" onclick="categorize('Dispensables')">Dispensables</a>
-        <a class="btn filter" href="#" onclick="categorize('Couplers')">Couplers</a>
+        <a class="btn filter filter-template" href="#"></a>
         <a class="btn clearfilters btn-danger" href="#" onclick="categorize('Clear')">Clear</a>
       </div>
       <div class="search">
         <input type="text" onkeyup="search()" id="search-box" placeholder="search your favorite smell here..." autofocus />
       </div>
       <hr/>
+
+      <div class="filters-description">
+        <div class="filter-info">
+          <h4 class="filter-header"></h4>
+          <p class="filter-text"></p>
+          <hr />
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-sm-12">
           <span class="float-right count-smells"></span>
