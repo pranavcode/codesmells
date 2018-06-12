@@ -111,5 +111,6 @@ body {
 /* Count section */
 .count-smells {
   padding: 12px;
+  font-size: 16px;
   color: #3b5998;
 }
