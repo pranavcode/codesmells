@@ -138,17 +138,68 @@ var codesmells = [{
   "category": "Change Preventers",
   "excerpt": "Situation that forces change in many unrelated class methods when \
     changes are made to a class.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "This smell is commonly seen as a part of the process, where a \
+    given class is changed in different ways for unrelated reasons. These small \
+    changes to various methods of the same class cause divergent effect, which \
+    means, making a slight change in one method require you to make many more \
+    minor changes in other methods. This is sometimes referred to as an opposite \
+    operation to the other code smell called Shotgun Surgery in which many small \
+    changes are made in many different classes for similar vivid reasons.",
+  "reasons": "Divergent change smells are mostly a result of poorly thought \
+    through design this design issues, or architectural decisions for program \
+    causes divergence effects. Things that compels developers to create smaller \
+    adjustments into existing class might also be a reason to generate this \
+    divergent change effects.",
+  "refactorings": "To resolve the smell like divergent change one can think of \
+    extracting a separate class. This class is mainly of all the functionalities \
+    that could represent those smaller changes required into the existing methods. \
+    If the class eventually needs potential change into several places, there might \
+    be a possibility of extracting those characteristics into a separate object of \
+    itself. In some instances where two or more classes show similar behavior, \
+    there is a sense of extraction of a super-class with a set of common aspects \
+    from those identified classes.",
   "references": "Extract Class (Fowler, 149)",
 }, {
   "name": "Duplicate Code",
   "category": "Dispensables",
   "excerpt": "Almost identical pieces of code repeated in two or more places.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "Duplicate code is one of the most commonly known smells in \
+    software development. This smell spreads throughout the areas of software \
+    code uncontrollably. Sometimes this it is very evident, but in other cases, \
+    it might be very subtle. Some duplication might be straightforward as an \
+    identically looking piece of code. Or it could be a little complex duplication \
+    where it is a duplication of process or flow of the program. This kind of \
+    repetitions might also be recognized as structural congruence. This application \
+    code, in the long run, bloats the software in an unhealthy manner.",
+  "reasons": "Duplication of code might occur when multiple people are working \
+    on the project, and they are working on the different task making them \
+    unaware of the changes made by their colleagues.  The solution created \
+    by their peers might have the particular piece of code that will resemble \
+    theirs. The code written by two or more people could be repurposed if it \
+    was already in place. In certain parts of the system, the duplication is \
+    not as gentle as we saw earlier. Two different processes might exhibit \
+    different outcomes, but the flow or structure may be the same. In some \
+    unfortunate situations, where deadlines are on the head of programmers, \
+    these duplications might seem almost right for the task at hand. The code \
+    masters then either become lazy or forgetful to clean the code post delivery.",
+  "refactorings": "Duplications can be one of the interesting smells to resolve. \
+    If two or more methods show similar code or two or more classes show identical \
+    code, this code could be extracted as a separate method (might also be within \
+    the same class) and this method could be called from places where this \
+    duplication is removed. If the repetition is on the classes, we can pull the \
+    common code up into the superclass. For areas where the duplicate code is \
+    within the constructors the constructor code for same level classes could also \
+    be pulled up in the same way as other class methods. In cases where creating \
+    superclass is not possible one can try extracting class as a component of \
+    different class and use it into the places where the duplication occurs. The \
+    duplication that is caused within complex code structure is a little difficult \
+    to find and resolve. The duplication caused by similar process could be solved \
+    by using an optimal algorithm either from among the processes which are \
+    duplicate or an entirely new process that could suitably replace all the \
+    duplicate processes. In some situations, the duplication might also be within \
+    expressions with only different conditions. There is a possibility of \
+    extracting common aspects from these expressions into a consolidated \
+    expression and extracted as a method eventually.",
   "references": "Extract Method (Fowler, 110), Substitue Algorithm (Fowler, 139), \
     Extract Class (Fowler, 149), Introduce Null Object (Fowler, 260), \
     Pull Up Field (Fowler, 320), Pull Up Method (Fowler, 322), \
@@ -157,9 +208,27 @@ var codesmells = [{
   "name": "Feature Envy",
   "category": "Couplers",
   "excerpt": "Classes that tends to work on data from other classes than their own.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "In object-oriented programming, the data and the behavior that \
+    works on that data belongs together in one object. If there is a case where \
+    too many calls to other classes are made by a method to obtain specific data \
+    or to achieve some outcome becomes a case of being feature envious.",
+  "reasons": "This type of smell occurs when the data is located into \
+    independent class, as in a data class, or data is misplaced in another class \
+    but belongs to a requesting class itself. When the field is moved from a class \
+    to another, one should make sure relevant methods are also moved along with \
+    that data.",
+  "refactorings": "As a rule of thumb if two or more things change at the same \
+    time they should stay at the same place, in our case same class, so the data \
+    and the behavior which work on that data, change simultaneously. So, it makes \
+    sense to keep them together. This is not always true, but right in most of the \
+    cases. In cases where a particular method is accessing data from another \
+    class, it might be a good practice to move that method to that specific class \
+    containing the data. In places where the method only accesses a particular \
+    piece of data, identifying that code and extracting it as a separate method \
+    could help. Eventually, this extracted method could be moved to a suitable \
+    place. If different methods from different classes access the data from one of \
+    the classes then identifying that class and moving or extracting the methods \
+    from other classes into this class helps to overcome this type of smell.",
   "references":
     "Extract Method (Fowler, 110), Move Method (Fowler, 142), Move Field (Fowler, 146)",
 }, {
