@@ -235,46 +235,134 @@ var codesmells = [{
   "name": "Inappropriate Intimacy",
   "category": "Couplers",
   "excerpt": "Class uses private methods or data of another class.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "This smell is evident when two or more classes become little \
+    too intimate and spend too much time accessing each other's private fields and \
+    behavior. As in real life, we follow specific space for humans same goes true \
+    for classes as well. These over intimate classes needs to be redesigned, so \
+    they do not interfere across private parts of other classes.",
+  "reasons": "This smell occurs when two or more classes know more than what they \
+    are supposed to know about each other. Little effort is taken to understand the \
+    relationship between the two classes. One has to keep looking for classes that \
+    spend too much time together good design suggests classes should know as little \
+    as possible about each other making them easier to maintain and reuse.",
+  "refactorings": "For such smells, one of the solutions refactoring is not very \
+    straightforward. One solution would be to move the parts of the class that \
+    interacts together more often to a suitable place. Moving the method or the \
+    field that interacts with the other class directly into that particular class. \
+    One has to be very careful about doing this kind of refactoring. Moving a \
+    method or a field is a pragmatic decision based on the actual requirements \
+    represented by given owner classes. Redesign of those classes can also be a \
+    better way to approach this smell.",
   "references":
     "Move Method (Fowler, 142), Move Field (Fowler, 146), \
     Change Bidirectional Association to Unidirectional Association (Fowler, 200), \
     Extract Class (Fowler, 149), Hide Delegate (Fowler, 157), \
     Replace Inheritance with Delegation (Fowler, 352)",
 }, {
-  "name": "Incomplete Library Client",
+  "name": "Incomplete Library Class",
   "category": "Couplers",
   "excerpt": "Third-party library stops meeting project's upcoming needs.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "Libraries are the primary mode of reusing well-written code. \
+    Libraries tend to cover all our requirements as and when we decided to use them. \
+    As our project progresses, there are situations where we have functionalities \
+    that should have been part of the library, but we cannot move that functionality \
+    into the library because the library is read-only and that forces us to start \
+    writing our library classes or functions.",
+  "reasons": "There are several reasons why this might occur. One of \
+    the primary reasons being the author of the \
+    library has not provided the feature as it was not widely required, also in some \
+    cases, the author refused to implement those changes. Projects come to such \
+    situations when they are highly reliant on the third-party libraries for their \
+    primary functions. This dependence is not harmful, but it needs a good set of \
+    encapsulation.",
+  "refactorings": "A proper encapsulation of third-party classes \
+    can help you introduce new methods within those classes that could work on \
+    existing library methods to achieve the additional functionality. These \
+    encapsulations can also help in replacing the library with a new \
+    production-ready alternative. In some situations where any modifications are \
+    required to the library class, one could try to implement a local extension for \
+    that library class instead.",
   "references": "Introduce Foreign Method (Fowler, 162), \
     Introduce Local Extension (Fowler, 164)",
 }, {
   "name": "Large Class",
   "category": "Bloaters",
   "excerpt": "Class have 'too' many fields/methods/lines of code.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "Large class was literally coined for having too many lines of \
+    codes/methods/fields. If a given class has too many instance variables or too \
+    many methods, we can observe that the class is doing too much of work, which \
+    could be further divided into lower level objects. Normally large classes are \
+    observed to have too many responsibilities. Giving too many responsibilities \
+    to a single class can create design flaws, introduce broken windows, add \
+    adaptability issues and complexity to the system.",
+  "reasons": "All classes normally start small, as they are created, during the \
+    process of solving a given problem. But, as the time pass by, the code grows \
+    and the classes get bloated. In typical cases, this can be observed when \
+    programmers are lazy to create additional objects for the new feature and they \
+    find it comforting to add this new feature in an existing class. This smell \
+    could be considered similar to long methods.",
+  "refactorings": "To resolve this smell one can think of an approach to \
+    slimming the class by considering all the responsibilities that class is \
+    currently holding. For each responsibility of that class one can investigate \
+    if there is a possibility to extract that responsibility as a separate class \
+    in itself, a separate component to the same class or a subclass. This \
+    extraction can also be based on the overall behaviour where more than one \
+    functionality can be clubbed together. Extracting the interfaces for the class \
+    to allow the clients to use that class can also be a good approach.",
   "references": "Extract Class (Fowler, 149), Replace Data Value with Object (Fowler, 175), Extract Subclass (Fowler, 330), Extract Interface (Fowler, 341)",
 }, {
   "name": "Lazy Class",
   "category": "Dispensables",
   "excerpt": "Class that is maintained but does nothing.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "Lazy classes are the classes that have no responsibility and \
+    perform no supporting function to help the existing classes with something. \
+    Understanding and maintaining classes will cost people, time and money for the \
+    project. They are not doing enough work to be considered worthy of their \
+    maintenance and should be eliminated.",
+  "reasons": "There are a couple of reasons why this smell could occur. One \
+    situation could be, where the class was designed to be fully-functional and \
+    did a credible work within a system. However, after some of the refactoring it \
+    has become ridiculously small and as a result, does not do any work. On the \
+    other hand, the class might as well be added as part of anticipated features \
+    which never got planned for, and the class remained as a blank class.",
+  "refactorings": "One of the ways we can resolve this situation is by directly \
+    removing the class because it has insignificant value in our codebase. If the \
+    class has some usefulness, it could be added as an inline class to other \
+    class. If the class is a subclass, it can be made to be merged inside the \
+    superclass itself.",
   "references": "Inline Class (Fowler, 154), Collapse Hierarchy (Fowler, 344)",
 }, {
   "name": "Long Method",
   "category": "Bloaters",
   "excerpt": "Method containing too many lines of code.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "A long method is a smell where methods are considered \
+    disproportionately larger and responsible for multiple tasks. Some methods are \
+    considered to be written with large code parts as a design and sometimes they \
+    are considered acceptable to grow to that sizes eventually. It is principally \
+    believed that using short methods is a superior approach, rather than using long \
+    methods. Too long methods can contain a substantial duplicate code. If a long \
+    method is divided into short methods, this duplication could be avoided, as the \
+    logic will be shared among the short methods. Having short methods makes the \
+    code to become more straightforward, easier to understand, less bloated as \
+    compared to its longer counterpart. Short methods tend to be easier to extend \
+    and maintain across the software lifecycle.",
+  "reasons": "Long methods are the eventual results of continuous functionality \
+    additions to the method identifying this smell at an early stage is not \
+    possible. This smell is only identified aftermath. In justification of adding \
+    a feature or functionality to an existing method, the method closes to a level \
+    of being ugly and oversized. These methods are created by just adding one line \
+    at a time, which is enough to realize this smell into reality.",
+  "refactorings": "Instead of adding a new line into an existing method, it can \
+    be thought of to be as a separate method. Having a good name for that method \
+    will describe itself to greater detail, than adding a comment within a bigger \
+    method. To tackle the length of a method one can think of extracting this \
+    pieces of code within as a separate method. The approach of extracting smaller \
+    methods could employee some techniques which can help to efficiently extract \
+    it from this method, such as, creating a separate object to be passed as a \
+    parameter. Some elements of the method like conditionals and loops are easily \
+    extractable and movable to a separate method. Thinking about a method in \
+    behavioral terms can tell us how that method should be divided into smaller \
+    pieces and extracted into other methods or even in some cases whole objects.",
   "references": "Extract Method (Fowler, 110), Replace Temp with Query (Fowler, 120), \
     Replace Method with Method Object (Fowler, 135), Decompose Conditional (Fowler, 238), \
     Preserve Whole Object (Fowler, 288), Introduce Parameter Object (Fowler, 295)",
@@ -282,9 +370,34 @@ var codesmells = [{
   "name": "Long Parameter List",
   "category": "Bloaters",
   "excerpt": "Methods that take too many parameters as their arguments.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "Long parameter lists are considered smell when there are more \
+    than four parameters passed to a method. In an ideal world, a method should \
+    never receive more than 3 to 4 parameters. Methods which accept more than \
+    these many numbers of parameters are typically designed as procedural methods. \
+    In an object-oriented sense, one should try to understand the need for these \
+    many parameters and try to use the least number of them. Thinking regarding \
+    objects make the list of parameters go down. Moreover, in some cases, it is \
+    okay to allow the method to track down the required data to perform the \
+    defined operations.",
+  "reasons": "Long parameters can be a result of too many things processed \
+    within a method. In some cases, the methods perform multiple functions or \
+    algorithms, and this parameter list helps control those aspects. Sometimes, \
+    the longer parent list can also be due to unidentified objects. Orchestrating \
+    method which deals with multiple objects need those objects to be passed in as \
+    parameters, and thus parameter list grows. As the list grows, it becomes more \
+    difficult to maintain and understand them. Their usage becomes painful too.",
+  "refactorings": "Before understanding why the long parameter list is present \
+    in the first place, one has to understand what responsibilities the method, \
+    accepting this long parameter list, is holding. Reconsidering the \
+    responsibilities of this method might help resolve the issue of having a large \
+    parameter list. Instead of using long parameter list, one can think of \
+    creating objects out of those parameters, which resemble in there \
+    characteristics. Converting the parameters required by the method as a \
+    first-class citizen into data fields and directly using them within the method \
+    is a better approach. If the current object does not contain all the necessary \
+    data, pass another object as a method parameter, and that object could hold \
+    the responsibility to fetch the required data. Also, one can merge separate \
+    data elements into a single parameter object.",
   "references": "Preserve Whole Object (Fowler, 288), \
     Replace Parameter with Method (Fowler, 292), \
     Introduce Parameter Object (Fowler, 295)",
