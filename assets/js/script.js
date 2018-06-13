@@ -20,7 +20,7 @@ var filters = [{
 }, {
   "name": "Change Preventers",
   "description":
-    "Change preventers literally make code masters from making meaningful \
+    "Change preventers literally prevent code masters from making meaningful \
     and required changes. These smells suggest that if you need to change \
     something in one place of your code, you have to make significant \
     changes in other areas too. As a result of which, the development \
@@ -96,16 +96,41 @@ var codesmells = [{
     fields and accessing methods (getters and setters), not considering the real power \
     of objects being into their behavior to operate and manage their data because they \
     know it better.",
-  "refactorings": "",
+  "refactorings": "If there are only public fields in such data classes, try to \
+    encapsulate the fields by allowing the external access just using getter and \
+    setter methods. Also, for data collection objects encapsulate the collection \
+    and add methods to make any changes to this collection (adding/deleting elements). \
+    In cases where the clients are using the data directly and doing their operations \
+    on this data, try investigating these client usages and classes. There might be \
+    possibilities where the functionality from client class could be extracted or \
+    moved to the data class itself. Making the data class more valuable to other \
+    users as well. As we walk away from pure data classes, we may want to rethink \
+    the needs of the underlying getter and setter methods. In many cases, these \
+    broad access methods are not required and should be either removed or hidden.",
   "references": "Move Method (Fowler, 142), Encapsulate Field (Fowler, 206), \
     Encapsulate Collection (Fowler, 208)",
 }, {
   "name": "Data Clumps",
   "category": "Bloaters",
   "excerpt": "Pieces of information that flows together across methods or classes.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "Bunches of data that come along together as a group whereever \
+    you see them in the code, they are probably data clumps. Removing certain \
+    data part makes the other part unusable or in some cases, it makes no sense. \
+    This is exactly the situation where these data pieces are crying hard to be \
+    noticed and clubbed into an object of their own, so they could stay together, \
+    happily ever after, including happy developers.",
+  "reasons": "The primary reason for this type of smell is poor software design \
+    and program structure. Sometimes, co-operative data gets added to the system \
+    as part of the feature, which works along with existing data to create data \
+    clumps. Also, this could be a result of developers being lazy in a hasty \
+    copy-pasty situation.",
+  "refactorings": "If one identifies the repeating clumps of data as an object, \
+    extract those data clusters into a class. In certain situations, the method \
+    parameters go hand-in-hand with one another, which could be a sign of a \
+    parameter object. It has seen that individual fields get passed from the \
+    class to an object or method. Instead of doing that the object could \
+    directly be passed in as a whole and preserve itself. The operations from \
+    the object are thus accessible to the third-parties.",
   "references": "Extract Class (Fowler, 149), Preserve Whole Object (Fowler, 288), \
     Introduce Parameter Object (Fowler, 295)",
 }, {
