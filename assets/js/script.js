@@ -45,8 +45,8 @@ var filters = [{
 
 var codesmells = [{
   "name": "Alternative Classes with Different Interfaces",
-	"category": "Tool Abusers",
-	"excerpt": "Classes performing same functions but have different method names.",
+  "category": "Tool Abusers",
+  "excerpt": "Classes performing same functions but have different method names.",
   "description": "This smells occurs when there are two or more classes that performs \
     identical function or operation during an action but have different method names for the same.",
   "reasons": "This happens when a programmer who created one of the classes might \
