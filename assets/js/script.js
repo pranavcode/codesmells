@@ -693,6 +693,7 @@ function search() {
       $(this).parent().hide();
     }
   });
+  countSmells();
 }
 
 function categorize(category) {
