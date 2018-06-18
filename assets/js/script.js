@@ -406,18 +406,55 @@ var codesmells = [{
   "category": "Couplers",
   "excerpt": "Successive calls made from one method to another with multiple hops \
     in between to accomplish specific thing.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "Message chains can transfer a sequence of method calls that  \
+    happen as the process flows from one point to another. This sequence of \
+    messages or continuous temporary variables strive to create a single result, \
+    but with many handshakes in between. This kind of message chains indeed \
+    surfaces the dependency between two or more parts of the system. This chains \
+    can create potentially unrelated relationships between many objects.",
+  "reasons": "The reason for such messages is mostly because of a client call \
+    that requests an object which in return requests another object, and so on. \
+    The request from the client cannot be satisfied by one object so that object \
+    needs to ask for the result from another object. That's when this chain \
+    occurs. The problem of having to access chain of messages could also be the \
+    reason for the client being dependent on navigating class structures. \
+    Modification to this relationship between these interrelated objects may also \
+    result in the modification of any client, accessing this object chain. Which \
+    could be the result of having multiple developers creating their modules or \
+    abstractions to handle a particular feature instead of collating them into a \
+    single entity. This single entity introduced by us as a code that exhibits the \
+    work that is required by the client immediately, instead of passing around of \
+    the calls across the whole codebase.",
+  "refactorings": "We could refactor this message chain by hiding delegation. \
+    Understanding the reason for the use of the last object in the chain could \
+    make the structure better. The object could be extracted, or the message could \
+    also be extracted to a location where the client can access it immediately. In \
+    some other cases, the methods could also be moved into early access \
+    locations.",
   "references": "Extract Method (Fowler, 110), Move Method (Fowler, 142), \
     Hide Delegate (Fowler, 157)",
 }, {
   "name": "Middle Man",
   "category": "Couplers",
   "excerpt": "Class that exits for a sole purpose of delegating work to other class.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "Delegation is a fundamental feature of objects in \
+    object-oriented programming. Delegations are great, but too much delegation \
+    could lead to objects having no intrinsic values. Their existence would be \
+    just for the sake of passing over messages from one location to the other. \
+    This concept is similar to the real-life middlemen, who pass over the work \
+    from one critical point to the other and merely become messengers between the \
+    two. There is a primary question that, is there an actual need for this kind \
+    of an object to exist, if there work is only to perform delegations.",
+  "reasons": "Middleman occurs due to various factors like refactoring while \
+    shortening the size of bigger classes into smaller ones. Relieving too much \
+    work from classes could also add mediators. Sometimes messages are refactored \
+    into middleman too. In some situations, the middleman is the result of gradual \
+    changes to a class where all vital elements of that class are moved to other \
+    classes, and the class remains empty with only delegations to other classes.",
+  "refactorings": "The resolution for intermediaries is the removal of these \
+    middle methods. Clients could be requested to call the end method which is \
+    required by them directly. The methods could be extracted into classes where \
+    they have the appropriate location for their existence.",
   "references": "Inline Method (Fowler, 117), Remove Middle Man (Fowler, 160), \
     Replace Delegation with Inheritance (Fowler, 355)",
 }, {
@@ -425,17 +462,59 @@ var codesmells = [{
   "category": "Change Preventers",
   "excerpt": "Changes made to one set of hierarchical classes needs its \
     replication into parallel classes.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "The case is sometimes referred to when there is a need to make \
+    changes into parallel subclasses. When a subclass is added to a similar class \
+    subclass needs to be added to another base class to complete the parallel \
+    structure. The inheritance becomes the structural requirement which needs to \
+    be satisfied on both the parallel sides. Failure to do so might create \
+    unexpected results and inconsistent logic.",
+  "reasons": "The reason for these changes might be related to ever-growing \
+    requirements on the project and ever-increasing hierarchical structure. As the \
+    hierarchy of two parents grows, it becomes difficult to migrate from that \
+    structure to a simpler structure. So, it becomes necessary to add those \
+    subclasses and make those changes into the parallel hierarchies.",
+  "refactorings": "Deduplication for this kind of smells is the first solution. \
+    Essentially deduplication of parallel hierarchies. This deduplication could be \
+    achieved in two steps. The first step is to realize and denote one of the \
+    hierarchies more significant in the codebase, where the instances are referred \
+    to by that significant hierarchy. The other parallel hierarchy which is \
+    causing this smell is then removed by moving the method and the related fields \
+    into the new identified significant hierarchy.",
   "references": "Move Method (Fowler, 142), Move Field (Fowler, 146)",
 }, {
   "name": "Primitive Obsession",
   "category": "Bloaters",
   "excerpt": "Obsessive use of primitive types instead of small classes for simple tasks.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "Primitives are primary data types. They include the likes of \
+    integers, strings, doubles, floats, another low-level language elements. They \
+    are pretty generic because they could be used in various ways. Whereas, \
+    composite data types like classes, structures, are very explicitly used by \
+    someone who needs them as per their requirement. Composite types are created \
+    on purpose. Modeling a solution for a given problem could be achieved in a \
+    better way in the form of composite types as compared to solving it in \
+    primitive types. Classes represent code and its relationship with the other \
+    code in the much better way. This concept could be better understood and told \
+    in the form of classes as compared to their primitive counterparts. Using \
+    higher-level abstractions typically creates clear and simplified code as \
+    compared to primitives.",
+  "reasons": "Primitives are primarily added due to unreasonable situations. It \
+    is argued by programmers that, creating the field of the primitive type in a \
+    class is much more comfortable than making a separate abstraction. Abstraction \
+    needs a complete thought process behind its existence, and thus programmers \
+    tend to simplify their own life by creating primitives. These primitives creep \
+    up into the code in the form of fields, variable or constants, as and when \
+    needed. Sometimes, these primitives are observed to be as a  simulation of \
+    abstraction types. This is a weak form of code, which is given a pretty name, \
+    so does not get caught. Easy to understand the form of these primitives then \
+    spread across the whole codebase.",
+  "refactorings": "The broad set of primitive fields could be possibly a logical \
+    group, which could be extracted as a separate class of its own. This extracted \
+    field could also carry their behavior with them into that class. If these \
+    primitives are used as a parameter into a function, those could be extracted \
+    as well, as a parameter objects and passed in as a whole object. The \
+    primitives can also be thought with their behavior and extracted as core \
+    classes or subclasses and associated with the state of the system instead of \
+    being into a particular class.",
   "references": "Extract Class (Fowler, 149), Replace Data Value with Object (Fowler, 175), \
     Replace Array With Object (Fowler, 186), Replace Type Code with Class (Fowler, 218), \
     Replace Type Code with Subclasses (Fowler, 223), Replace Type Code with State/Strategy (Fowler, 227), \
@@ -445,9 +524,29 @@ var codesmells = [{
   "category": "Tool Abusers",
   "excerpt": "Sub-classes use only some of the methods and data inheirted from parent \
     classes, keeping unneeded methods unused or redefined to throw undefined exceptions.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "Refused “bequest” is a form of smell where the inheritance is \
+    compelling the subclasses to implement things that they don't want to. This is \
+    to say that, the inheritance causes the unexpected code to be inherited. \
+    Instead of honoring the inheritance, the code is written to refuse this \
+    request. The subclass says “I am not responsible for implementing this \
+    particular method,” which is when this kind of smell occurs.",
+  "reasons": "Refused bequest occur as a result of unclear inheritance. The \
+    inheritance between the classes which are not related to each other and are in \
+    completely different domains. This kind of inheritance might be a result of a \
+    desire to use some code from the superclass, merely because it exists and has \
+    some resemblance. The functionality inherited from the superclass, may not be \
+    directly applicable to the subclass. Thus the subclass refuses to implement \
+    the behavior and sometimes throws exceptions.",
+  "refactorings": "This kind of inheritance is genuinely unhealthy for the \
+    codebase and should be eliminated, when possible. One could replace this \
+    inheritance using delegation. Subclass which has nearly no commonalities with \
+    the superclass makes no sense to be in the hierarchy. In situations where \
+    inheritance is appropriate, remove the unused methods and fields from the \
+    subclass. The fields and methods which are needed by the subclasses from the \
+    parent classes could be extracted into an even higher superclass, which could \
+    be inherited by these superclasses and then by the subclasses. Making it an \
+    explicit inheritance, which is better in form and structure, and give value to \
+    the codebase overall.",
   "references": "Push Down Field (Fowler, 329), Push Down Method (Fowler, 322), \
     Replace Inheritance with Delegation (Fowler, 352)",
 }, {
@@ -455,9 +554,28 @@ var codesmells = [{
   "category": "Change Preventers",
   "excerpt": "Adding a change in specific part of the code requires many small \
     changes in many different classes.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "Shotgun surgery is a form of code change as a compulsion into \
+    various places in the codebase for a small change required in a specific part. \
+    The new behavior which is required to be added forces the programmers to make \
+    a lot of small changes in different places. This could be considered as an \
+    opposite smell for divergent change smell, where change requires to make many \
+    changes in the same class.",
+  "reasons": "When a feature or behavior is needed to be introduced in the \
+    system, and a single responsibility is split among a large number of classes, \
+    many small changes are required, to make sure this feature changes could be \
+    introduced in the system, which is doing a shotgun surgery. Sometimes to \
+    minimize the responsibility of a given class many classes are introduced in \
+    the system to act as a part of the same responsibility.",
+  "refactorings": "Shotgun surgery could be resolved by moving the required \
+    methods or fields into a single class that could hold them appropriately. If \
+    no existing class can hold this particular responsibility, a new class should \
+    be created. We want to arrive at an ideal situation, where minimal changes \
+    could be made to the system’s different places if a feature is required to be \
+    added. Making small changes required by many different parts of the system \
+    tends to introduce more wrong and broken code. Sometimes, moving the fields \
+    and methods into other class or a single class could lead to having classes in \
+    the system which are almost empty, those classes could be either eliminated or \
+    inlined into the existing classes.",
   "references": "Move Method (Fowler, 142), Move Field (Fowler, 146), \
     Inline Class (Fowler, 154)",
 }, {
@@ -465,18 +583,56 @@ var codesmells = [{
   "category": "Dispensables",
   "excerpt": "Code that is written in anticipation of future requirements and \
     stays unused forever.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "Speculative generality is a smell that occurs due to \
+    futuristic fields or abstractions present in the code. This anticipated code \
+    is the result of future proofing. The code has no significance in the system \
+    today and may not have any significance in future as well. There is a \
+    possibility of some future behavior as anticipated by the programmer, which \
+    may or may not necessarily come true due to various reasons.",
+  "reasons": "In some cases, the code is created in anticipation of future \
+    requirement and to support any future behavior changes. This change becomes \
+    unreasonable as there is no guarantee that the future features will ever be \
+    implemented. These code pieces then become unnecessarily hard to understand \
+    and maintain.",
+  "refactorings": "Solutions to speculative generality are almost always related \
+    to removal of the futuristic code. In some situations, the abstract classes \
+    could be removed by collapsing the hierarchy. The abstractions which are not \
+    required at the moment could be eliminated by inlining the classes. The \
+    methods which are not used can also be eliminated. The parameters which are \
+    part of the function calls could be removed, as they are safely written to \
+    support the current behavior. Deletion of unused fields is equally \
+    straightforward.",
   "references": "Inline Class (Fowler, 154), Rename Method (Fowler, 273), \
     Remove Parameter (Fowler, 277), Collapse Hierarchy (Fowler, 344)",
 }, {
   "name": "Switch Statements",
   "category": "Tool Abusers",
   "excerpt": "Complex set of conditionals to perform next step.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "Switch statements smell is primarily related to having a \
+    complex set of conditionals across the system. This smell also denotes the \
+    duplication of similar conditions across different sections of the codebase. \
+    This is the reaction of procedural thinking instead of object-orientation and \
+    missed opportunity of beautiful concepts of object-oriented programming like \
+    polymorphism.",
+  "reasons": "Using switch statements is not a good sign within the \
+    object-oriented code. Even though sometimes it is necessary to use them, but \
+    they are rarely used. To properly utilize the object orientation smaller \
+    switch cases are scattered across different places in the codebase and \
+    sometimes these conditional codes are also in the form of if statements. If \
+    the same conditional statements are duplicated across the system, when we \
+    change one such switch statement others needs to be changed as well, to \
+    maintain the consistency.",
+  "refactorings": "The primary resolution for such kind of smells is to use \
+    polymorphism. Isolating the switch statements into their appropriate classes \
+    and extracting those into specific methods and moving those methods into \
+    proper classes is an excellent way to resolve this duplication and complexity \
+    due to conditions. Sometimes, these switch statements require the type based \
+    code, where a specific type of object is conditioned against. In such \
+    situations, subclasses could be used as a strategy. Replacing the condition \
+    with polymorphism is the best option in this situation. When the switch is not \
+    avoidable, then one can think of replacing the results from switch conditions \
+    into smaller methods, so it becomes little more straightforward to understand \
+    and extend.",
   "references": "Replace Type Code with Subclasses (Fowler, 223), \
     Replace Type Code with State/Strategy (Fowler, 227), \
     Replace Conditional with Polymorphism (Fowler, 255), \
@@ -487,9 +643,28 @@ var codesmells = [{
   "category": "Tool Abusers",
   "excerpt": "Temporary properties that get their values under very specific \
     circumstances, otherwise remains empty.",
-  "description": "",
-  "reasons": "",
-  "refactorings": "",
+  "description": "Some object contains fields that are not used all the time. \
+    They are used at a specific circumstance; otherwise, they remain empty. In \
+    some instances, these fields, which are not used, may also contain an \
+    irrelevant data which is difficult to comprehend. These shortlived fields are \
+    either in the form of state or flag fields.",
+  "reasons": "In most of the situations, an algorithm, which is employed by the \
+    solution, requires some amount of data to exist as part of the input. Instead \
+    of acquiring the information or passing it as a parameter, the programmer \
+    creates fields of the data in that class itself. The algorithm only needs the \
+    temporary field for specific conditions; otherwise they are unused. If one \
+    takes a field in an object, to check for their existence and if they have some \
+    specific value, when you take them they are almost always empty for some \
+    reason. Moreover, this makes the code difficult to understand. The \
+    significance of these temporaries is very context dependent and not widely \
+    known, which could be harmful to the future development of the system.",
+  "refactorings": "Temporary fields are resolved by extracting them into a \
+    separate class of their own. This class can use these fields to their full \
+    extent. Whenever this abstracted class is performing some operation, these \
+    fields are used. Making an object for those fields will make sure the \
+    shortlived fields are fully utilized. This class then can be used by the other \
+    classes, which requires those short fields. The temporary field values could \
+    then be verified using null objects as a conditional code if required.",
   "references": "Extract Class (Fowler, 149), Introduce Null Object (Fowler, 260)",
 }]
 
